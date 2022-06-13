@@ -9,3 +9,4 @@ lib/
 *.tgz
 values-secret*
 packages/.server-id
+.env.local
