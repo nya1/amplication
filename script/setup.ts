@@ -2,6 +2,7 @@ import { exec } from "child_process";
 import { satisfies } from "semver";
 import { createLogger, format, Logger, transports } from "winston";
 import * as ora from "ora";
+import { envSetup } from "./localEnvSetup";
 
 const { combine, colorize, simple } = format;
 
@@ -118,6 +119,7 @@ if (require.main === module) {
   (async () => {
     try {
       preValidate();
+      await envSetup();
       logger.info(`Welcome to Amplication installer!`);
       logger.info(
         "This script will help you easily set up a running amplication server"

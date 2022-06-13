@@ -26,7 +26,7 @@ function buildFolder(isTemp: boolean) {
 
 export async function envSetup() {
   const ENV_FILE_PATHS_FOR_UPDATE = [
-    "../packages/amplication-server/.env.local",
+    "./packages/amplication-server/.env.local",
   ];
 
   await Promise.all(ENV_FILE_PATHS_FOR_UPDATE.map(assertEnvFileExist));
@@ -36,6 +36,7 @@ export async function envSetup() {
       writeFileSync(relativePath, newFile);
     });
   });
+  return;
 }
 
 async function refactorEnvFile(
@@ -58,9 +59,8 @@ async function refactorEnvFile(
 async function assertEnvFileExist(relativePath: string) {
   const isFileExist = existsSync(relativePath);
   if (!isFileExist) {
+    console.log(`Created a new env file in ${relativePath}`);
     await outputFile(relativePath, "");
   }
   return;
 }
-
-envSetup();
